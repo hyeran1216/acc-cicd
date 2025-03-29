@@ -30,6 +30,10 @@ jobs:
         with:
           region: ${{ env.AWS_REGION }}
 
+      - name: Echo resolved IMAGE_URI
+        run: |
+          echo "Login registry: ${{ steps.login-ecr.outputs.registry }}"
+          
       - name: Build, tag, and push Docker image to ECR
         run: |
           IMAGE_URI="${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:latest"
